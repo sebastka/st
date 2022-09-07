@@ -1886,8 +1886,16 @@ xbell(void)
 {
 	if (!(IS_SET(MODE_FOCUSED)))
 		xseturgency(1);
-	if (bellvolume)
+	if (bellvolume) {
 		XkbBell(xw.dpy, xw.win, bellvolume, (Atom)NULL);
+
+		/*
+		 * Create a new process and send bell notification
+		 * If it fails: do nothing
+		*/
+		if (fork() == 0)
+			execvp(bell_warning_command, bell_warning_args);
+	}
 }
 
 void

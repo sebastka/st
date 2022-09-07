@@ -35,6 +35,10 @@ char *vtiden = "\033[?6c";
 static float cwscale = 1.0;
 static float chscale = 1.0;
 
+/* Bell warning command */
+char* bell_warning_command = "notify-send";
+char* bell_warning_args[] = { "notify-send", "--urgency=critical", "Bell!", NULL };
+
 /*
  * word delimiter string
  *
